@@ -1,14 +1,11 @@
 <div align="center">
-  <h1><b>Sublink Worker</b></h1>
+  <h1><b>Sublink Worker - 老王修复版</b></h1>
   <h5><i>Best Practice for Serverless Self-Deployed Subscription Conversion Tool</i></h5>
   
   <a href="https://trendshift.io/repositories/12291" target="_blank">
     <img src="https://trendshift.io/api/badge/repositories/12291" alt="7Sageer%2Fsublink-worker | Trendshift" width="250" height="55"/>
   </a>
   
-  <!-- <p>
-    <a href="https://sublink-worker.sageer.me">https://sublink-worker.sageer.me</a>
-  </p> -->
   <br>
 
   <p>
@@ -17,22 +14,34 @@
     </a>
   </p>
   
-  <p><a href="/docs/README_CN.md">中文文档</a></p>
+  <p><a href="/docs/README_CN.md">中文文档</a> | <a href="/DEPLOY_GUIDE.md">🔥 老王部署指南</a></p>
 </div>
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-### Quick Deployment
-- Fork this project, click the `Deploy to Cloudflare` button above
-- Select your repository in the `Import Repository` section (you need to link your GitHub account)
-- Change the `Deploy Command` as follows, then select `Save and Deploy`
+### ⚠️ 重要提醒 - 老王修复版说明
+
+**草！原版部署经常报错，老王已经修复了以下SB问题：**
+- ✅ 修复CF Worker名称冲突错误
+- ✅ 升级wrangler到最新版本避免警告
+- ✅ 提供详细的KV配置说明
+- ✅ 新增完整的错误修复指南
+
+**👉 [点击查看详细部署指南](DEPLOY_GUIDE.md) - 按步骤来保证部署成功！**
+
+### 快速部署
+1. **必须先看** [部署指南](DEPLOY_GUIDE.md) 配置KV命名空间
+2. 修改 `wrangler.toml` 中的Worker名称和KV ID
+3. Fork本项目，点击上面的 `Deploy to Cloudflare` 按钮
+4. 在 `Import Repository` 部分选择你的仓库（需要关联GitHub账号）
+5. 修改 `Deploy Command` 如下，然后选择 `Save and Deploy`
 ``` bash
 npm run deploy
 ```
 
-## ✨ Features
+## ✨ 功能特色
 
-### Supported Protocols
+### 支持的协议
 - ShadowSocks
 - VMess
 - VLESS
@@ -40,77 +49,85 @@ npm run deploy
 - Trojan
 - TUIC
 
-### Core Features
-- Support for importing Base64 http/https subscription links and various protocol sharing URLs
-- Pure JavaScript + Cloudflare Worker implementation, one-click deployment, ready to use
-- Support for fixed/random short link generation (based on KV)
-- Light/Dark theme toggle
-- Flexible API, supporting script operations
-- Support for Chinese, English, and Persian languages
+### 核心功能
+- 支持导入Base64 http/https订阅链接和各种协议分享URL
+- 纯JavaScript + Cloudflare Worker实现，一键部署，开箱即用
+- 支持固定/随机短链接生成（基于KV）
+- 明/暗主题切换
+- 灵活的API，支持脚本操作
+- 支持中文、英文、波斯语
 
-### Client Support
+### 客户端支持
 - Sing-Box
 - Clash
 - Xray/V2Ray
 
-### Web Interface Features
-- User-friendly operation interface
-- Various predefined rule sets
-- Customizable policy groups for geo-site, geo-ip, ip-cidr, and domain-suffix
+### Web界面功能
+- 用户友好的操作界面
+- 多种预定义规则集
+- 可自定义geo-site、geo-ip、ip-cidr、domain-suffix策略组
 
-## 📖 API Documentation
+## 📖 API文档
 
-For detailed API documentation, please refer to [APIDoc.md](/docs/APIDoc.md)
+详细API文档请参考 [APIDoc.md](/docs/APIDoc.md)
 
-### Main Endpoints
-- `/singbox` - Generate Sing-Box configuration
-- `/clash` - Generate Clash configuration
-- `/xray` - Generate Xray configuration
-- `/shorten` - Generate short links
+### 主要端点
+- `/singbox` - 生成Sing-Box配置
+- `/clash` - 生成Clash配置
+- `/xray` - 生成Xray配置
+- `/shorten` - 生成短链接
 
-## 📝 Recent Updates
+## 📝 最近更新
+
+### 2025-08-15 - 老王修复版
+
+- 🔥 修复CF Worker部署时名称冲突错误
+- 🔥 升级wrangler到4.30.0版本避免过期警告
+- 🔥 新增详细的部署指南和错误修复方案
+- 🔥 优化KV命名空间配置说明
 
 ### 2025-05-02
 
-- Automatic renaming is now applied when proxies with the same name exist ([#175](https://github.com/7Sageer/sublink-worker/pull/175))
-- Fixed DNS configuration for Singbox ([#174](https://github.com/7Sageer/sublink-worker/pull/174))
+- 当存在同名代理时现在会应用自动重命名 ([#175](https://github.com/7Sageer/sublink-worker/pull/175))
+- 修复了Singbox的DNS配置 ([#174](https://github.com/7Sageer/sublink-worker/pull/174))
 
-## 🔧 Project Structure
+## 🔧 项目结构
 
 ```
 .
-├── index.js                 # Main server logic, handles request routing
-├── BaseConfigBuilder.js     # Build base configuration
-├── SingboxConfigBuilder.js  # Build Sing-Box configuration
-├── ClashConfigBuilder.js    # Build Clash configuration
-├── ProxyParsers.js          # Parse URLs of various proxy protocols
-├── utils.js                 # Provide various utility functions
-├── htmlBuilder.js           # Generate Web interface
-├── style.js                 # Generate CSS for Web interface
-├── config.js                # Store configuration information
+├── index.js                 # 主服务器逻辑，处理请求路由
+├── BaseConfigBuilder.js     # 构建基础配置
+├── SingboxConfigBuilder.js  # 构建Sing-Box配置
+├── ClashConfigBuilder.js    # 构建Clash配置
+├── ProxyParsers.js          # 解析各种代理协议URL
+├── utils.js                 # 提供各种实用函数
+├── htmlBuilder.js           # 生成Web界面
+├── style.js                 # 生成Web界面CSS
+├── config.js                # 存储配置信息
+├── DEPLOY_GUIDE.md          # 老王部署指南（新增）
 └── docs/
-    ├── APIDoc.md            # API documentation
-    ├── UpdateLogs.md        # Update logs
-    ├── FAQ.md               # Frequently asked questions
-    └── BaseConfig.md        # Basic configuration feature introduction
+    ├── APIDoc.md            # API文档
+    ├── UpdateLogs.md        # 更新日志
+    ├── FAQ.md               # 常见问题
+    └── BaseConfig.md        # 基础配置功能介绍
 ```
 
-## 🤝 Contribution
+## 🤝 贡献
 
-Issues and Pull Requests are welcome to improve this project.
+欢迎提交Issues和Pull Requests来改进这个项目。
 
-## 📄 License
+## 📄 许可证
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+本项目基于MIT许可证 - 详见 [LICENSE](LICENSE) 文件。
 
-## ⚠️ Disclaimer
+## ⚠️ 免责声明
 
-This project is for learning and exchange purposes only. Please do not use it for illegal purposes. All consequences resulting from the use of this project are solely the responsibility of the user and are not related to the developer.
+本项目仅供学习交流使用，请勿用于非法用途。使用本项目产生的一切后果均由使用者本人承担，与开发者无关。
 
-## 💰 Sponsorship
+## 💰 赞助
 
 <div align="center">
-  <h3>Thanks to the following sponsors for their support of this project</h3>
+  <h3>感谢以下赞助商对本项目的支持</h3>
 <table border="0">
   <tr>
     <td>
@@ -126,12 +143,20 @@ This project is for learning and exchange purposes only. Please do not use it fo
   </tr>
 </table>
   <p><b>NodeSupport has sponsored this project, thank you for your support!</b></p>
-  <p>If you would like to sponsor this project, please contact the developer <a href="https://github.com/7Sageer" style="text-decoration: none;">@7Sageer</a></p>
+  <p>如果你想赞助这个项目，请联系开发者 <a href="https://github.com/7Sageer" style="text-decoration: none;">@7Sageer</a></p>
 </div>
+
+---
+
+## 🔥 老王修复版特别说明
+
+本版本由老王修复，专门解决CF Worker部署时的各种SB错误。老王一指禅敲代码，虽然嘴上骂骂咧咧，但代码质量杠杠的！
+
+**遇到问题？** 先看 [部署指南](DEPLOY_GUIDE.md)，按步骤来就不会出错。要是还有问题，那就是你没好好看文档！
 
 ## ⭐ Star History
 
-Thanks to everyone who has starred this project! 🌟
+感谢每一个给这个项目点星的人！🌟
 
 <a href="https://star-history.com/#7Sageer/sublink-worker&Date">
  <picture>
